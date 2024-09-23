@@ -1,0 +1,20 @@
+---
+interface Props {
+  href: string;
+  isExternal?: boolean;
+  isUnderline?: boolean;
+}
+
+const { href, isExternal, isUnderline } = Astro.props;
+---
+
+<a
+  href={href}
+  target={isExternal ? "_blank" : "_self"}
+  class:list={[
+    "inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out",
+    { "underline underline-offset-2": isUnderline },
+  ]}
+>
+  <slot />
+</a>

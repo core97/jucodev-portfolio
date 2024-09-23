@@ -1,0 +1,19 @@
+---
+import { ICON_BY_NAME } from "./Icon.constants";
+
+interface Props {
+  className?: string;
+  name: keyof typeof ICON_BY_NAME;
+  size?: number;
+}
+
+const {
+  name,
+  className = "group-hover:stroke-black group-hover:dark:stroke-white transition-colors duration-300 ease-in-out",
+  size = 18,
+} = Astro.props;
+
+const Component = ICON_BY_NAME[name];
+---
+
+<Component size={size} className={className} />

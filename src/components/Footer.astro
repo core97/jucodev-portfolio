@@ -1,0 +1,36 @@
+---
+import Container from "@/components/Container.astro";
+import Icon from "@/components/Icon/Icon.astro";
+import { HTML_SELECTORS } from "@/constants/html-selectors";
+---
+
+<footer>
+  <Container>
+    <div class="flex justify-between items-center">
+      <div>&copy; 2024 | JUCODEV</div>
+      <div class="flex flex-wrap gap-1 items-center">
+        <button
+          id={HTML_SELECTORS.BUTTON_LIGHT_THEME}
+          aria-label="Light theme"
+          class="size-8 flex items-center justify-center rounded-full"
+        >
+          <Icon name="sun" />
+        </button>
+        <button
+          id={HTML_SELECTORS.BUTTON_DARK_THEME}
+          aria-label="Dark theme"
+          class="size-8 flex items-center justify-center rounded-full"
+        >
+          <Icon name="moon" />
+        </button>
+        <button
+          id={HTML_SELECTORS.BUTTON_OS_THEME}
+          aria-label="System theme"
+          class="size-8 flex items-center justify-center rounded-full"
+        >
+          <Icon name="monitor" />
+        </button>
+      </div>
+    </div>
+  </Container>
+</footer>

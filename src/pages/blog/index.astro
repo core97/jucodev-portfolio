@@ -1,0 +1,29 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import Container from "@/components/Container.astro";
+import ArrowCard from "@/components/Cards/ArrowCard.astro";
+import { PAGES } from "@/constants/pages";
+
+const posts = await getCollection("posts");
+---
+
+<Layout title="Blog" description="Lorem ipsum">
+  <Container>
+    <main>
+      <ul class="flex flex-col gap-4">
+        {
+          posts.map((post) => (
+            <li>
+              <ArrowCard
+                title={post.data.title}
+                description={post.data.description}
+                href={`${PAGES.BLOG}/${post.slug}`}
+              />
+            </li>
+          ))
+        }
+      </ul>
+    </main>
+  </Container>
+</Layout>

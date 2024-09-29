@@ -1,0 +1,46 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import Container from "@/components/Container.astro";
+import ArrowCard from "@/components/Cards/ArrowCard.astro";
+import { PAGES } from "@/constants/pages";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("posts");
+  const tags = [...new Set(posts.flatMap((el) => el.data.tags))];
+
+  return tags.map((el) => ({
+    params: { tag: el },
+    props: {
+      posts: posts.filter(({ data }) => data.tags.includes(el)),
+      tag: el,
+    },
+  }));
+}
+
+const { posts, tag } = Astro.props;
+---
+
+<Layout title="Blog" description="Lorem ipsum">
+  <Container>
+    <div class="mb-6">
+      <h3 class="font-bold text-xl underline underline-offset-4 decoration-wavy animate-blur-fade">{`# ${tag}`}</h3>
+    </div>
+    <ul class="flex flex-col gap-4">
+      {
+        posts
+          .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+          .map((post) => (
+            <li class="animate-blur-fade">
+              <ArrowCard
+                id={post.id}
+                title={post.data.title}
+                description={post.data.description}
+                href={`${PAGES.BLOG}/${post.slug}`}
+              />
+            </li>
+          ))
+      }
+    </ul>
+  </Container>
+</Layout>

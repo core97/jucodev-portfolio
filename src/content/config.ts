@@ -10,7 +10,7 @@ export const posts = defineCollection({
       })
       .transform((value) => new Date(value)),
     description: z.string(),
-    tags: z.array(z.string()),
+    tags: z.array(z.enum(["ci_cd", "github_actions", "npm"])),
   }),
 });
 

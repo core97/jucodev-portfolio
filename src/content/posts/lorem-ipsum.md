@@ -4,7 +4,7 @@ date: '2024-09-22'
 description: 'Pepe es el mejor'
 tags:
     - npm
-    - ci/cd
+    - ci_cd
     - github_actions
 ---
 

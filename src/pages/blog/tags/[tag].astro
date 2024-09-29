@@ -1,9 +1,6 @@
 ---
 import { getCollection } from "astro:content";
-import Layout from "@/ui/layouts/Layout.astro";
-import Container from "@/ui/components/Container.astro";
-import ArrowCard from "@/ui/components/Cards/ArrowCard.astro";
-import { PAGES } from "@/constants/pages";
+import PostsListByTag from "@/ui/pages/PostsListByTag.astro";
 
 export async function getStaticPaths() {
   const posts = await getCollection("posts");
@@ -21,26 +18,4 @@ export async function getStaticPaths() {
 const { posts, tag } = Astro.props;
 ---
 
-<Layout title="Blog" description="Lorem ipsum">
-  <Container>
-    <div class="mb-6">
-      <h3 class="font-bold text-xl underline underline-offset-4 decoration-wavy animate-blur-fade">{`# ${tag}`}</h3>
-    </div>
-    <ul class="flex flex-col gap-4">
-      {
-        posts
-          .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
-          .map((post) => (
-            <li class="animate-blur-fade">
-              <ArrowCard
-                id={post.id}
-                title={post.data.title}
-                description={post.data.description}
-                href={`${PAGES.BLOG}/${post.slug}`}
-              />
-            </li>
-          ))
-      }
-    </ul>
-  </Container>
-</Layout>
+<PostsListByTag posts={posts} tag={tag} />

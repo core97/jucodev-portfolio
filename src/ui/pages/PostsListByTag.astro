@@ -1,0 +1,56 @@
+---
+import {
+  getCollection,
+  type InferEntrySchema,
+  type Render,
+} from "astro:content";
+import Layout from "@/ui/layouts/Layout.astro";
+import Container from "@/ui/components/Container.astro";
+import ArrowCard from "@/ui/components/Cards/ArrowCard.astro";
+import { PAGES } from "@/constants/pages";
+
+interface Props {
+  posts: Array<
+    {
+      id: string;
+      slug: string;
+      body: string;
+      collection: "posts";
+      data: InferEntrySchema<"posts">;
+    } & {
+      render(): Render[".md"];
+    }
+  >;
+  tag: string;
+}
+
+const { posts, tag } = Astro.props;
+---
+
+<Layout title="Blog" description="Lorem ipsum">
+  <Container>
+    <div class="mb-6">
+      <h3
+        class="font-bold text-xl underline underline-offset-4 decoration-wavy animate-blur-fade"
+      >
+        {`# ${tag}`}
+      </h3>
+    </div>
+    <ul class="flex flex-col gap-4">
+      {
+        posts
+          .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+          .map((post) => (
+            <li class="animate-blur-fade">
+              <ArrowCard
+                id={post.id}
+                title={post.data.title}
+                description={post.data.description}
+                href={`${PAGES.BLOG}/${post.slug}`}
+              />
+            </li>
+          ))
+      }
+    </ul>
+  </Container>
+</Layout>

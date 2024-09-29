@@ -1,0 +1,83 @@
+---
+import { getCollection } from "astro:content";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import Layout from "@/ui/layouts/Layout.astro";
+import Container from "@/ui/components/Container.astro";
+import Link from "@/ui/components/Link.astro";
+import ArrowCard from "@/ui/components/Cards/ArrowCard.astro";
+import Social from "@/ui/components/Social.astro";
+import { PAGES } from "@/constants/pages";
+import { getLangFromUrl, useTranslation } from "@/i18n/utils";
+
+const posts = await getCollection("posts");
+
+const sortedPosts = posts.sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime()
+);
+
+const latestPost = sortedPosts.slice(0, 5);
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslation(lang);
+
+/**
+ * TODO:
+ * - Añadir internaxionalizacion (ingles y español)
+ * - Poner mas propiedades en el detalle del post (fecha, tiempo de lectura) y ajustar sus estilos (espacios y tal)
+ * - Hacer la descripción mi perfil con Chat GPT
+ * - Añadir los meta tags en el <head>
+ * - Crear componente boton con variantes ghost y outline
+ * - Añadir en la parte de projects este blog creado
+ * - Hacer el boton de volver atras
+ */
+---
+
+<Layout title="Welcome to Astro." description="Lorem ipsum">
+  <Container>
+    <main>
+      <h4
+        class="animate-blur-fade font-semibold text-black dark:text-white flex items-center"
+      >
+        Hola, soy Juan <span class="mx-2 text-xl">👋🏻</span>
+      </h4>
+      <Social className="my-4 animate-blur-fade" />
+      <div class="flex flex-col gap-16">
+        <section>
+          <article class="space-y-4">
+            <p class="animate-blur-fade">{t("about_me.description")}</p>
+          </article>
+        </section>
+
+        <section class="space-y-6">
+          <div
+            class="flex flex-wrap gap-y-2 items-center justify-between animate-blur-fade"
+          >
+            <h5 class="font-semibold text-black dark:text-white">
+              Latest posts
+            </h5>
+            <Link href={getRelativeLocaleUrl(lang, PAGES.BLOG)}>
+              See all posts
+            </Link>
+          </div>
+          <ul class="flex flex-col gap-4">
+            {
+              latestPost.map((post) => (
+                <li class="animate-blur-fade">
+                  <ArrowCard
+                    title={post.data.title}
+                    description={post.data.description}
+                    href={getRelativeLocaleUrl(
+                      lang,
+                      `${PAGES.BLOG}/${post.slug}`
+                    )}
+                    id={post.id}
+                  />
+                </li>
+              ))
+            }
+          </ul>
+        </section>
+      </div>
+    </main>
+  </Container>
+</Layout>

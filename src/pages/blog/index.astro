@@ -6,20 +6,61 @@ import ArrowCard from "@/components/Cards/ArrowCard.astro";
 import { PAGES } from "@/constants/pages";
 
 const posts = await getCollection("posts");
+
+const groupedByYear = posts.reduce(
+  (acc, value) => {
+    const year = value.data.date.getFullYear();
+
+    acc[year] = acc[year] ?? [];
+    acc[year].push(value);
+
+    return acc;
+  },
+  {} as Record<number, typeof posts>
+);
+
+const tags = [...new Set(posts.flatMap((el) => el.data.tags))].sort();
 ---
 
 <Layout title="Blog" description="Lorem ipsum">
   <Container>
     <main>
-      <ul class="flex flex-col gap-4">
+      <div>
+        <h4 class="font-bold text-xl">Tags</h4>
+        <ul class="mt-2 flex flex-wrap justify-center gap-6 animate-blur-fade">
+          {
+            tags.map((el) => (
+              <li>
+                <a
+                  href={`${PAGES.BLOG_BY_TAG}/${el}`}
+                  class="underline underline-offset-4 decoration-wavy transition duration-200 hover:text-red-500 hover:cursor-pointer"
+                >
+                  {`# ${el}`}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <ul class="mt-16 flex flex-col gap-6">
         {
-          posts.map((post) => (
+          Object.entries(groupedByYear).map(([year, posts]) => (
             <li>
-              <ArrowCard
-                title={post.data.title}
-                description={post.data.description}
-                href={`${PAGES.BLOG}/${post.slug}`}
-              />
+              <h5 class="mb-2 font-bold">{year}</h5>
+              <ul class="flex flex-col gap-4">
+                {posts
+                  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+                  .map((post) => (
+                    <li class="animate-blur-fade">
+                      <ArrowCard
+                        id={post.id}
+                        title={post.data.title}
+                        description={post.data.description}
+                        href={`${PAGES.BLOG}/${post.slug}`}
+                      />
+                    </li>
+                  ))}
+              </ul>
             </li>
           ))
         }

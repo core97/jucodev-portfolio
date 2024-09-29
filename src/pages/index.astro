@@ -4,21 +4,42 @@ import Layout from "@/layouts/Layout.astro";
 import Container from "@/components/Container.astro";
 import Link from "@/components/Link.astro";
 import ArrowCard from "@/components/Cards/ArrowCard.astro";
+import Social from "@/components/Social.astro";
 import { PAGES } from "@/constants/pages";
 
 const posts = await getCollection("posts");
+
+const sortedPosts = posts.sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime()
+);
+
+const latestPost = sortedPosts.slice(0, 5);
+
+/**
+ * TODO:
+ * - Poner mas propiedades en el detalle del post (fecha, tiempo de lectura) y ajustar sus estilos (espacios y tal)
+ * - Hacer la descripción mi perfil con Chat GPT
+ * - Añadir los meta tags en el <head>
+ * - Añadir internaxionalizacion (ingles y español)
+ * - Crear componente boton con variantes ghost y outline
+ * - Añadir en la parte de projects este blog creado
+ * - Hacer el boton de volver atras
+ */
 ---
 
 <Layout title="Welcome to Astro." description="Lorem ipsum">
   <Container>
     <main>
-      <h4 class="animate font-semibold text-black dark:text-white flex items-center">
-        Hola desde <span class="text-xl mx-1">🇪🇸</span>, soy Juan <span class="text-xl">👋🏻</span>
+      <h4
+        class="animate-blur-fade font-semibold text-black dark:text-white flex items-center"
+      >
+        Hola, soy Juan <span class="mx-2 text-xl">👋🏻</span>
       </h4>
+      <Social className="my-4 animate-blur-fade" />
       <div class="flex flex-col gap-16">
         <section>
           <article class="space-y-4">
-            <p class="animate">
+            <p class="animate-blur-fade">
               I am a minimal, seo friendly, accessible portfolio and blog for
               developers. I am an even more lightweight version of my popular
               theme
@@ -31,14 +52,14 @@ const posts = await getCollection("posts");
               </Link>. I have a lighthouse scores of 100 across the board for
               performance, accesibility, best practices and SEO.
             </p>
-            <p class="animate">
+            <p class="animate-blur-fade">
               I come packed with full type safety, a sitemap, an rss feed,
               markdown and mdx support (use components in your markdown) through
               astro integrations. I am styled with tailwind and come
               preconfigured with light, dark and system/os theme preferences out
               of the box.
             </p>
-            <p class="animate">
+            <p class="animate-blur-fade">
               Visit
               <Link
                 href="https://github.com/markhorn-dev/astro-nano"
@@ -53,8 +74,8 @@ const posts = await getCollection("posts");
           </article>
         </section>
 
-        <section class="animate space-y-6">
-          <div class="flex flex-wrap gap-y-2 items-center justify-between">
+        <section class="space-y-6">
+          <div class="flex flex-wrap gap-y-2 items-center justify-between animate-blur-fade">
             <h5 class="font-semibold text-black dark:text-white">
               Latest posts
             </h5>
@@ -62,8 +83,8 @@ const posts = await getCollection("posts");
           </div>
           <ul class="flex flex-col gap-4">
             {
-              posts.map((post) => (
-                <li>
+              latestPost.map((post) => (
+                <li class="animate-blur-fade">
                   <ArrowCard
                     title={post.data.title}
                     description={post.data.description}

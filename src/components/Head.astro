@@ -19,7 +19,11 @@ const { title, description } = Astro.props;
 <script>
   import { addEventListenerThemeButtons, preloadTheme } from "@/utils/theme";
 
-  preloadTheme();
-  
-  addEventListenerThemeButtons();
+  function init() {
+    preloadTheme();
+    addEventListenerThemeButtons();
+  }
+
+  document.addEventListener("DOMContentLoaded", () => init());
+  document.addEventListener("astro:after-swap", () => init());
 </script>

@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content";
-import Layout from "@/layouts/Layout.astro";
-import Container from "@/components/Container.astro";
+import Layout from "@/ui/layouts/Layout.astro";
+import Container from "@/ui/components/Container.astro";
 
 export async function getStaticPaths() {
   const posts = await getCollection("posts");

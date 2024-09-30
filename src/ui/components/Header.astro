@@ -1,21 +1,36 @@
 ---
+import { getRelativeLocaleUrl } from "astro:i18n";
 import Link from "@/ui/components/Link.astro";
 import Container from "@/ui/components/Container.astro";
 import { PAGES } from "@/constants/pages";
+import { getLangFromUrl, useTranslation } from "@/i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslation(lang);
+
+console.log({ lang })
 ---
 
 <header>
   <Container>
     <div class="flex flex-wrap gap-y-2 justify-between">
-      <Link href={PAGES.HOME}>
+      <Link href={getRelativeLocaleUrl(lang, PAGES[lang].HOME)}>
         <div class="font-semibold">JUCODEV</div>
       </Link>
       <nav class="flex gap-1">
-        <Link href={PAGES.BLOG} isUnderline={true}>blog</Link>
+        <Link
+          href={getRelativeLocaleUrl(lang, PAGES[lang].BLOG)}
+          isUnderline={true}>{t("nav.blog")}</Link
+        >
         <span>/</span>
-        <Link href={PAGES.WORK} isUnderline>work</Link>
+        <Link href={getRelativeLocaleUrl(lang, PAGES[lang].WORK)} isUnderline
+          >{t("nav.work")}</Link
+        >
         <span>/</span>
-        <Link href={PAGES.PROJECTS} isUnderline>projects</Link>
+        <Link
+          href={getRelativeLocaleUrl(lang, PAGES[lang].PROJECTS)}
+          isUnderline>{t("nav.projects")}</Link
+        >
       </nav>
     </div>
   </Container>

@@ -1,13 +1,11 @@
 ---
-import {
-  getCollection,
-  type InferEntrySchema,
-  type Render,
-} from "astro:content";
+import { type InferEntrySchema, type Render } from "astro:content";
+import { getRelativeLocaleUrl } from "astro:i18n";
 import Layout from "@/ui/layouts/Layout.astro";
 import Container from "@/ui/components/Container.astro";
 import ArrowCard from "@/ui/components/Cards/ArrowCard.astro";
 import { PAGES } from "@/constants/pages";
+import { getLangFromUrl } from "@/i18n/utils";
 
 interface Props {
   posts: Array<
@@ -23,6 +21,8 @@ interface Props {
   >;
   tag: string;
 }
+
+const lang = getLangFromUrl(Astro.url);
 
 const { posts, tag } = Astro.props;
 ---
@@ -46,7 +46,10 @@ const { posts, tag } = Astro.props;
                 id={post.id}
                 title={post.data.title}
                 description={post.data.description}
-                href={`${PAGES.BLOG}/${post.slug}`}
+                href={getRelativeLocaleUrl(
+                  lang,
+                  `${PAGES[lang].BLOG}/${post.slug}`
+                )}
               />
             </li>
           ))

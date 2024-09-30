@@ -1,7 +1,7 @@
 import en from "./locales/en.json";
-import es from "./locales/en.json";
+import es from "./locales/es.json";
 
-enum LANGUAGES {
+export enum LANGUAGES {
   en = "en",
   es = "es",
 }
@@ -25,6 +25,10 @@ export function getLangFromUrl(url: URL): LANGUAGES {
 
 export function useTranslation(lang: keyof typeof LANGUAGES) {
   return function t(key: keyof (typeof LOCALES)[typeof lang]) {
+    console.log('IDIOMA');
+    console.log({ lang });
+    console.log('TRADUCCION');
+    console.log(LOCALES[lang])
     return LOCALES[lang][key] || LOCALES[DEFAULT_LANG][key];
   };
 }

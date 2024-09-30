@@ -1,3 +1,6 @@
 {
-  "about_me.description": "Soy Juan"
+  "about_me.description": "Soy Juan",
+  "nav.blog": "blog",
+  "nav.work": "trabajo",
+  "nav.projects": "proyectos"
 }

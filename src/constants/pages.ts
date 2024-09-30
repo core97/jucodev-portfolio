@@ -1,7 +1,18 @@
+import { LANGUAGES } from '@/i18n/utils'
+
 export const PAGES = {
-  BLOG: "/blog",
-  BLOG_BY_TAG: "/blog/tags",
-  HOME: "/",
-  PROJECTS: "/projects",
-  WORK: "/work",
-};
+  [LANGUAGES.en]: {
+    BLOG: "/blog",
+    BLOG_BY_TAG: "/blog/tags",
+    HOME: "/",
+    PROJECTS: "/projects",
+    WORK: "/work",
+  },
+  [LANGUAGES.es]: {
+    BLOG: "/blog",
+    BLOG_BY_TAG: "/blog/etiquetas",
+    HOME: "/",
+    PROJECTS: "/proyectos",
+    WORK: "/trabajo",
+  },
+}

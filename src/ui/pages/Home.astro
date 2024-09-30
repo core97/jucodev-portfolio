@@ -55,7 +55,7 @@ const t = useTranslation(lang);
             <h5 class="font-semibold text-black dark:text-white">
               Latest posts
             </h5>
-            <Link href={getRelativeLocaleUrl(lang, PAGES.BLOG)}>
+            <Link href={getRelativeLocaleUrl(lang, PAGES[lang].BLOG)}>
               See all posts
             </Link>
           </div>
@@ -68,7 +68,7 @@ const t = useTranslation(lang);
                     description={post.data.description}
                     href={getRelativeLocaleUrl(
                       lang,
-                      `${PAGES.BLOG}/${post.slug}`
+                      `${PAGES[lang].BLOG}/${post.slug}`
                     )}
                     id={post.id}
                   />

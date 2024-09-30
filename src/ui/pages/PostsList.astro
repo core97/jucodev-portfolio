@@ -1,11 +1,14 @@
 ---
 import { getCollection } from "astro:content";
+import { getRelativeLocaleUrl } from "astro:i18n";
 import Layout from "@/ui/layouts/Layout.astro";
 import Container from "@/ui/components/Container.astro";
 import ArrowCard from "@/ui/components/Cards/ArrowCard.astro";
 import { PAGES } from "@/constants/pages";
+import { getLangFromUrl } from "@/i18n/utils";
 
 const posts = await getCollection("posts");
+const lang = getLangFromUrl(Astro.url);
 
 const groupedByYear = posts.reduce(
   (acc, value) => {
@@ -32,7 +35,10 @@ const tags = [...new Set(posts.flatMap((el) => el.data.tags))].sort();
             tags.map((el) => (
               <li>
                 <a
-                  href={`${PAGES.BLOG_BY_TAG}/${el}`}
+                  href={getRelativeLocaleUrl(
+                    lang,
+                    `${PAGES[lang].BLOG_BY_TAG}/${el}`
+                  )}
                   class="underline underline-offset-4 decoration-wavy transition duration-200 hover:text-red-500 hover:cursor-pointer"
                 >
                   {`# ${el}`}
@@ -56,7 +62,10 @@ const tags = [...new Set(posts.flatMap((el) => el.data.tags))].sort();
                         id={post.id}
                         title={post.data.title}
                         description={post.data.description}
-                        href={`${PAGES.BLOG}/${post.slug}`}
+                        href={getRelativeLocaleUrl(
+                          lang,
+                          `${PAGES[lang].BLOG}/${post.slug}`
+                        )}
                       />
                     </li>
                   ))}

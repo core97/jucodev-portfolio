@@ -44,6 +44,7 @@ const { posts, tag } = Astro.props;
             <li class="animate-blur-fade">
               <ArrowCard
                 id={post.id}
+                tags={post.data.tags}
                 title={post.data.title}
                 description={post.data.description}
                 href={getRelativeLocaleUrl(

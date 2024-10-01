@@ -2,5 +2,6 @@
   "about_me.description": "I am Juan",
   "nav.blog": "blog",
   "nav.work": "work",
-  "nav.projects": "projects"
+  "nav.projects": "projects",
+  "reading_time.label": "{{time}} minutes of reading"
 }

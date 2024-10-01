@@ -60,6 +60,7 @@ const tags = [...new Set(posts.flatMap((el) => el.data.tags))].sort();
                     <li class="animate-blur-fade">
                       <ArrowCard
                         id={post.id}
+                        tags={post.data.tags}
                         title={post.data.title}
                         description={post.data.description}
                         href={getRelativeLocaleUrl(

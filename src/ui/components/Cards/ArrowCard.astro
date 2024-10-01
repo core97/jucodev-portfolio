@@ -3,10 +3,11 @@ interface Props {
   description: string;
   href: string;
   id: string;
+  tags: string[];
   title: string;
 }
 
-const { description, href, id, title } = Astro.props;
+const { description, href, id, tags, title } = Astro.props;
 ---
 
 <a
@@ -14,12 +15,19 @@ const { description, href, id, title } = Astro.props;
   class="relative group flex flex-nowrap py-3 px-4 pr-10 rounded-lg border border-black/15 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/5 hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out"
 >
   <div class="flex flex-col flex-1 truncate">
-    <div transition:name={`title-${id}`} class="font-semibold">
+    <div transition:name={`title-${id}`} class="font-semibold mb-1">
       {title}
     </div>
-    <div class="text-sm">
+    <div class="text-sm mb-1">
       {description}
     </div>
+    <ul class="flex gap-2">
+      {
+        tags.map((el) => (
+          <li class="text-xs text-stone-500 dark:text-stone-400">{`#${el}`}</li>
+        ))
+      }
+    </ul>
   </div>
   <svg
     xmlns="http://www.w3.org/2000/svg"

@@ -22,11 +22,11 @@ const t = useTranslation(lang);
 
 /**
  * TODO:
- * - Añadir internaxionalizacion (ingles y español)
  * - Poner mas propiedades en el detalle del post (fecha, tiempo de lectura) y ajustar sus estilos (espacios y tal)
  * - Hacer la descripción mi perfil con Chat GPT
  * - Añadir los meta tags en el <head>
- * - Crear componente boton con variantes ghost y outline
+ * - Crear componente boton con variantes ghost y outline para hacer lo de volver atrás
+ * - Añadir las paginas de projects y works como vacío
  * - Añadir en la parte de projects este blog creado
  * - Hacer el boton de volver atras
  */
@@ -64,6 +64,7 @@ const t = useTranslation(lang);
               latestPost.map((post) => (
                 <li class="animate-blur-fade">
                   <ArrowCard
+                    tags={post.data.tags}
                     title={post.data.title}
                     description={post.data.description}
                     href={getRelativeLocaleUrl(

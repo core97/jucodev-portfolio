@@ -1,8 +1,11 @@
 {
-  "about_me.description": "Soy Juan",
   "nav.blog": "blog",
   "nav.work": "trabajo",
   "nav.projects": "proyectos",
-  "reading_time.label": "{{time}} minutos de lectura"
+  "reading_time.label": "{{time}} minutos de lectura",
+  "home.header": "¡Bienvenid@!",
+  "about_me.first_paragraph": "¡Hola! Soy Juan, un desarrollador web especializado en JavaScript y sus tecnologías asociadas. A lo largo de mi carrera, he trabajado en todo tipo de proyectos, desde aplicaciones web complejas hasta soluciones eficientes en el backend, siempre con un enfoque en rendimiento y calidad de código.",
+  "about_me.second_paragraph": "Cuando no estoy escribiendo código, probablemente esté paseando a mi perra, o sudando la camiseta practicando algún deporte.",
+  "about_me.third_paragraph": "Este blog es mi espacio para compartir lo que voy aprendiendo, desde tips sobre desarrollo web hasta ideas y reflexiones personales. Si te interesa el mundo del código o simplemente buscas algo interesante que leer, ¡bienvenid@! Espero que te sientas a gusto aquí."
 
 }

@@ -22,13 +22,11 @@ const t = useTranslation(lang);
 
 /**
  * TODO:
- * - Poner mas propiedades en el detalle del post (fecha, tiempo de lectura) y ajustar sus estilos (espacios y tal)
- * - Hacer la descripción mi perfil con Chat GPT
+ * - Crear un selector para los idiomas con un modal
  * - Añadir los meta tags en el <head>
- * - Crear componente boton con variantes ghost y outline para hacer lo de volver atrás
- * - Añadir las paginas de projects y works como vacío
+ * - Añadir las paginas de works como vacío
+ * - Añadir el sitemap
  * - Añadir en la parte de projects este blog creado
- * - Hacer el boton de volver atras
  */
 ---
 
@@ -36,15 +34,17 @@ const t = useTranslation(lang);
   <Container>
     <main>
       <h4
-        class="animate-blur-fade font-semibold text-black dark:text-white flex items-center"
+        class="animate-blur-fade font-semibold text-xl text-black dark:text-white flex items-center"
       >
-        Hola, soy Juan <span class="mx-2 text-xl">👋🏻</span>
+        {t('home.header')}<span class="mx-2 text-xl">👋</span>
       </h4>
       <Social className="my-4 animate-blur-fade" />
       <div class="flex flex-col gap-16">
         <section>
           <article class="space-y-4">
-            <p class="animate-blur-fade">{t("about_me.description")}</p>
+            <p class="animate-blur-fade">{t("about_me.first_paragraph")}</p>
+            <p class="animate-blur-fade">{t("about_me.second_paragraph")}</p>
+            <p class="animate-blur-fade">{t("about_me.third_paragraph")}</p>
           </article>
         </section>
 

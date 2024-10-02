@@ -24,7 +24,7 @@ const { description, href, id, tags, title } = Astro.props;
     <ul class="flex gap-2">
       {
         tags.map((el) => (
-          <li class="text-xs text-stone-500 dark:text-stone-400">{`#${el}`}</li>
+          <li class="text-sm font-thin text-stone-600 dark:text-stone-400">{`#${el}`}</li>
         ))
       }
     </ul>

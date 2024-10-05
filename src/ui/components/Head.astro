@@ -24,6 +24,7 @@ const { title, description } = Astro.props;
     addEventListenerThemeButtons();
   }
 
+  // @see https://stackoverflow.com/questions/77278507/javascript-is-not-working-on-page-change-in-astro
   document.addEventListener("DOMContentLoaded", () => init());
   document.addEventListener("astro:after-swap", () => init());
 </script>

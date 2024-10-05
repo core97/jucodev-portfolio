@@ -2,7 +2,8 @@
 import { type InferEntrySchema, type Render } from "astro:content";
 import Layout from "@/ui/layouts/Layout.astro";
 import Container from "@/ui/components/Container.astro";
-import { getLangFromUrl, useTranslation } from "@/i18n/utils";
+import { useUrl } from "@/ui/hooks/useUrl";
+import { useTranslation } from "@/ui/hooks/useTranslation";
 import { getIntlLongDate } from "@/utils/date";
 import { calculateReadingTime } from "@/utils/reading-time";
 
@@ -20,8 +21,8 @@ interface Props {
 
 const { post } = Astro.props;
 
+const {  getLangFromUrl } = useUrl();
 const lang = getLangFromUrl(Astro.url);
-
 const t = useTranslation(lang);
 
 const formatedDate = getIntlLongDate(post.data.date, lang);

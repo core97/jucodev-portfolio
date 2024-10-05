@@ -1,4 +1,4 @@
-import { LANGUAGES } from "@/i18n/utils";
+import { LANGUAGES } from "@/i18n/config";
 
 export function getIntlLongDate(date: Date, locale: LANGUAGES) {
   let formatedDate = new Intl.DateTimeFormat("en-US", {

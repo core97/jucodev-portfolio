@@ -5,7 +5,7 @@ import Layout from "@/ui/layouts/Layout.astro";
 import Container from "@/ui/components/Container.astro";
 import ArrowCard from "@/ui/components/Cards/ArrowCard.astro";
 import { PAGES } from "@/constants/pages";
-import { getLangFromUrl } from "@/i18n/utils";
+import { useUrl } from "@/ui/hooks/useUrl";
 
 interface Props {
   posts: Array<
@@ -22,6 +22,7 @@ interface Props {
   tag: string;
 }
 
+const {  getLangFromUrl } = useUrl();
 const lang = getLangFromUrl(Astro.url);
 
 const { posts, tag } = Astro.props;

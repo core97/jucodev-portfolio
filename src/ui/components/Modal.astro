@@ -1,0 +1,99 @@
+---
+import Icon from "@/ui/components/Icon/Icon.astro";
+
+interface Props {
+  className?: string;
+  id?: string;
+  size?: "sm" | "md" | "lg" | "xl" | "2xl";
+  title?: string;
+}
+
+const { className, id, size = "md", title } = Astro.props;
+---
+
+<dialog
+  id={id}
+  class:list={[
+    {
+      "modal--size-sm": size === "sm",
+      "modal--size-md": size === "md",
+      "modal--size-lg": size === "lg",
+      "modal--size-xl": size === "xl",
+      "modal--size-2xl": size === "2xl",
+    },
+  ]}
+>
+  <header>
+    <button type="button" id={`close_button_${id}`} aria-label="close"
+      ><Icon name="close" /></button
+    >
+    {title && <h4 class="text-lg font-bold mb-5">{title}</h4>}
+  </header>
+
+  <slot />
+</dialog>
+
+<script define:vars={{ id }}>
+  const modal = document.querySelector(`#${id}`);
+
+  const closeModalButton = document.querySelector(`#close_button_${id}`);
+
+  closeModalButton?.addEventListener("click", () => {
+    modal.close();
+  });
+</script>
+
+<style>
+  dialog {
+    @apply my-28 mx-auto p-6;
+    @apply w-full;
+    @apply relative;
+    @apply bg-white dark:bg-stone-900;
+    @apply border-stone-500 rounded-md;
+    @apply text-stone-950 dark:text-white;
+  }
+
+  .modal--size-sm {
+    @apply max-w-sm;
+  }
+
+  .modal--size-md {
+    @apply max-w-md;
+  }
+
+  .modal--size-lg {
+    @apply max-w-lg;
+  }
+
+  .modal--size-xl {
+    @apply max-w-xl;
+  }
+
+  .modal--size-2xl {
+    @apply max-w-2xl;
+  }
+
+  dialog[open] {
+    animation: fade_in 0.1s ease-in forwards;
+  }
+
+  dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  dialog button[aria-label="close"] {
+    position: absolute;
+    right: 8px;
+    top: 8px;
+  }
+
+  @keyframes fade_in {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+</style>

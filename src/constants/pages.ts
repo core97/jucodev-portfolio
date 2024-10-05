@@ -1,4 +1,4 @@
-import { LANGUAGES } from '@/i18n/utils'
+import { LANGUAGES } from '@/i18n/config'
 
 export const PAGES = {
   [LANGUAGES.en]: {

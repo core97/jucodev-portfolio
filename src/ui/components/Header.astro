@@ -2,9 +2,14 @@
 import { getRelativeLocaleUrl } from "astro:i18n";
 import Link from "@/ui/components/Link.astro";
 import Container from "@/ui/components/Container.astro";
+import Icon from "@/ui/components/Icon/Icon.astro";
+import Modal from "@/ui/components/Modal.astro";
 import { PAGES } from "@/constants/pages";
-import { getLangFromUrl, useTranslation } from "@/i18n/utils";
+import { useUrl } from "@/ui/hooks/useUrl";
+import { useTranslation } from "@/ui/hooks/useTranslation";
+import { LANGUAGES } from "@/i18n/config";
 
+const { getLangFromUrl } = useUrl();
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslation(lang);
 ---
@@ -15,7 +20,12 @@ const t = useTranslation(lang);
       <Link href={getRelativeLocaleUrl(lang, PAGES[lang].HOME)}>
         <div class="font-semibold">JUCODEV</div>
       </Link>
-      <nav class="flex gap-1">
+      <nav class="flex items-center gap-1">
+        <button id="lang_selector_trigger" type="button"
+          ><Icon name="language" size={20} /></button
+        >
+
+        <span>|</span>
         <Link
           href={getRelativeLocaleUrl(lang, PAGES[lang].BLOG)}
           isUnderline={true}>{t("nav.blog")}</Link
@@ -33,3 +43,59 @@ const t = useTranslation(lang);
     </div>
   </Container>
 </header>
+
+<Modal id="modal_lang" title={t("language.label")}>
+  <div class="flex gap-10 justify-around">
+    {
+      [
+        {
+          id: "button_en_language",
+          label: t("language.en_label"),
+        },
+        {
+          id: "button_es_language",
+          label: t("language.es_label"),
+        },
+      ].map((el) => (
+        <button type="button" id={el.id}>
+          {el.label}
+        </button>
+      ))
+    }
+  </div>
+</Modal>
+
+<script>
+  import { LANGUAGES } from "@/i18n/config";
+  import { useModal } from "@/ui/hooks/useModal";
+  import { useUrl } from "@/ui/hooks/useUrl";
+  import { useNavigation } from "@/ui/hooks/useNavigation";
+
+  function init() {
+    const { getUrlFromClient, getRelativeUrlByLang } = useUrl();
+    const { redirect } = useNavigation();
+    const url = getUrlFromClient();
+    const { onOpen } = useModal("#modal_lang");
+
+    const showModalButton = document.querySelector("#lang_selector_trigger");
+    const enLanguageButton = document.querySelector("#button_en_language");
+    const esLanguageButton = document.querySelector("#button_es_language");
+
+    showModalButton?.addEventListener("click", () => {
+      onOpen();
+    });
+
+    enLanguageButton?.addEventListener("click", () => {
+      const relativeUrl = getRelativeUrlByLang(url, LANGUAGES.en);
+      redirect(relativeUrl);
+    });
+
+    esLanguageButton?.addEventListener("click", () => {
+      const relativeUrl = getRelativeUrlByLang(url, LANGUAGES.es);
+      redirect(relativeUrl);
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", () => init());
+  document.addEventListener("astro:after-swap", () => init());
+</script>

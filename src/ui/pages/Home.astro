@@ -7,7 +7,9 @@ import Link from "@/ui/components/Link.astro";
 import ArrowCard from "@/ui/components/Cards/ArrowCard.astro";
 import Social from "@/ui/components/Social.astro";
 import { PAGES } from "@/constants/pages";
-import { getLangFromUrl, useTranslation } from "@/i18n/utils";
+import { useUrl } from "@/ui/hooks/useUrl";
+import { useTranslation } from "@/ui/hooks/useTranslation";
+
 
 const posts = await getCollection("posts");
 
@@ -17,12 +19,12 @@ const sortedPosts = posts.sort(
 
 const latestPost = sortedPosts.slice(0, 5);
 
+const {  getLangFromUrl } = useUrl();
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslation(lang);
 
 /**
  * TODO:
- * - Crear un selector para los idiomas con un modal
  * - Añadir los meta tags en el <head>
  * - Añadir las paginas de works como vacío
  * - Añadir el sitemap

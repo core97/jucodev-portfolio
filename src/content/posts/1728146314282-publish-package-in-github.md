@@ -1,7 +1,7 @@
 ---
-title: "Como publicar un paquete en Github Packages"
+title: "Como publicar paquetes en Github Packages"
 date: "2024-10-05"
-description: "Pepe es el mejor"
+description: Aprende a publicar paquetes npm de JavaScript o Node.js en GitHub Packages y automatiza el proceso con CI/CD usando GitHub Actions.
 tags:
   - npm
   - ci_cd
@@ -17,11 +17,9 @@ tags:
 
 ## 📜 Introducción
 
-Si alguna vez te has encontrado copiando y pegando código entre proyectos, sabes lo tedioso que puede ser. Publicar paquetes de Node.js no solo te permite reutilizar ese código de forma más eficiente, sino que también te da la oportunidad de compartir tus soluciones con otros desarrolladores o incluso entre diferentes equipos de trabajo. Al tener tu código empaquetado y disponible, puedes implementarlo fácilmente en cualquier proyecto sin tener que repetir esfuerzo, asegurando que todo funcione de manera consistente.
+Si alguna vez has copiado y pegado código entre proyectos, sabes lo tedioso que puede ser. Publicar paquetes de Node.js permite reutilizar ese código de forma eficiente y compartirlo con otros desarrolladores. Tener tu código empaquetado facilita su implementación en cualquier proyecto, asegurando consistencia sin repetir esfuerzos.
 
-En este artículo, te voy a guiar paso a paso para publicar un paquete en **GitHub Packages**. ¿Por qué GitHub? Bueno, además de estar integrado con tus repositorios, ofrece la ventaja de una capa gratuita para publicar paquetes privados a partir de una organización. Esto es genial si quieres mantener tus paquetes privados dentro de tu equipo sin tener que gastar dinero en ello.
-
-Pero eso no es todo. También veremos cómo automatizar todo el proceso usando **buenas prácticas de CI/CD**. Utilizaremos **GitHub Actions** para hacer que cada vez que quieras publicar una nueva versión del paquete, el proceso ocurra de manera automática y fluida, sin complicaciones ni pasos manuales. La idea es que, una vez configurado, todo se gestione solo: desde la creación de releases hasta la publicación final.
+Este artículo te guía para publicar un paquete en **GitHub Packages**, aprovechando su integración con repositorios y la opción gratuita para paquetes privados en organizaciones. Además, aprenderás a automatizar el proceso mediante **GitHub Actions**, permitiendo que las publicaciones se realicen automáticamente sin pasos manuales.
 
 ## 🐙 Preparando la cuenta Github
 
@@ -44,7 +42,7 @@ Por último crearemos un repositorio dentro de la organización y [añadiremos e
 
 Vamos a iniciar el proyecto con el comando `npm init -y`, el cual nos creará el **package.json** con lo más básico. Deberemos añadirle la siguiente configuración para que nos permita publicarlo:
 
-- El `name` deberá ser el nombre de la organización seguido del nombre del paquete por ejemplo `@jucodev/my-utils`. De esta forma le indicamos al scope al que pertenece el paquete. Nota: el nombre de la organización debe ser en **snake case**.
+- El `name` deberá ser el nombre de la organización seguido del nombre del paquete por ejemplo `@jucodev/my-utils`. De esta forma le indicamos al scope al que pertenece el paquete.
 - Añadir la información del repositorio con `repository.type` y `repository.url`.
 - Añadir la url del _registry_ de Github Packages con `publishConfig.registry`.
 - Si estáis utilizando solamente **Javascript**, deberéis de crear la propiedad `types` con las declaraciones de lo que se exporta desde el archivo de entrada, en este caso `src/index.js`. Esto es tan simple como crear otro archivo dentro de `src` llamado `index.d.ts`, el cual pondremos `export * from 'index'`. Y ahora en `types` le ponemos la ruta de `src/index.d.ts`.
@@ -73,6 +71,16 @@ Vamos a iniciar el proyecto con el comando `npm init -y`, el cual nos creará el
   "author": "",
   "license": "ISC",
   "description": ""
+}
+```
+
+Si queréis probar que os funciona bien la configuración, podéis empaquetar el proyecto en local con `npm pack`, esto generará un comprimido **.tgz** en la raíz de vuestro proyecto. Luego lo instalamos en otro proyecto poniendo en el `package.json` el nombre de la dependencia y en vez de ponerle la versión le indicaremos la ruta donde se encuentra, por ejemplo:
+
+```json
+{
+  "dependencies": {
+    "@jucodev/my-utils": "file:../my-utils/jucodev-my-utils-1.0.0.tgz"
+  }
 }
 ```
 
@@ -253,7 +261,6 @@ name: Publish NPM package
 on:
   release:
     types: [published]
-
 # ...
 ```
 
@@ -263,7 +270,33 @@ on:
 git commit -m "feat: implement new authentication system" -m "BREAKING CHANGE: The old authentication API has been removed. The new system requires clients to use OAuth2."
 ```
 
+Enhorabuena 🥳, ya tenemos todo integrado con **CI/CD**. Por último haremos la prueba de instalación del paquete.
+
 ## 📦 Instalando del paquete
 
-- Configurar ("npm config set ...") el token creado anteriormente en nuestro local para poder instalar el paquete
-- Hacer un "npm i" del paquete
+Llego el momento, vamos a comprobar si toda esta configuración ha merecido la pena. Para instalar el paquete debemos de añadir el token (_personal access token_) creado anteriormente en Github y el registry en nuestra configuración de `npm`. En mi caso utilizo el archivo `.npmrc` global pero puedes segmentarlo únicamente a cada proyecto creando el `.npmrc` en la ráiz de cada proyecto.
+
+Para añadir en el `.npmrc` gblobal ejecutaremos los siguientes comandos:
+
+```shell
+# Ponemos el scope de nuestra organización seguido de la url del registry de Github Packages
+# npm config set <scope>:registry=https://npm.pkg.github.com/
+npm config set @jucodev:registry=https://npm.pkg.github.com/
+
+# Ponemos la autenticación con el "personal access token" generado en Github
+npm config set //npm.pkg.github.com/:_authToken=<token>
+```
+
+Una vez configurado, hacemos la instalación del paquete desde otro proyecto:
+
+```shell
+npm i @jucodev/my-utils
+```
+
+![package installation](https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExc3hoaGgzZTI3cm5jM3U4Ymd2cTZxZm5sa3p6M3c1OWk1dmo0dWs2NCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/1g2JyW7p6mtZc6bOEY/giphy.gif)
+
+**¡Enhorabuena, ya tienes automatizada la publicación del paquete para centrarte en el desarrollo!**
+
+Espero que te haya resultado interesante, muchas gracias 🤗.
+
+# 🤜 🤛

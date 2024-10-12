@@ -45,7 +45,6 @@ Vamos a iniciar el proyecto con el comando `npm init -y`, el cual nos creará el
 - El `name` deberá ser el nombre de la organización seguido del nombre del paquete por ejemplo `@jucodev/my-utils`. De esta forma le indicamos al scope al que pertenece el paquete.
 - Añadir la información del repositorio con `repository.type` y `repository.url`.
 - Añadir la url del _registry_ de Github Packages con `publishConfig.registry`.
-- Si estáis utilizando solamente **Javascript**, deberéis de crear la propiedad `types` con las declaraciones de lo que se exporta desde el archivo de entrada, en este caso `src/index.js`. Esto es tan simple como crear otro archivo dentro de `src` llamado `index.d.ts`, el cual pondremos `export * from 'index'`. Y ahora en `types` le ponemos la ruta de `src/index.d.ts`.
 - En caso de tener **Typescript**, le pondremos como `main` la ruta correspondiente del archivo de entrada de lo compilado y añadiremos la propiedad `types` con el archivo de declaraciones que nos genera.
 - Si queréis añadir **subpaths** para que luego al importar el paquete desde otro proyecto (por ejemplo, `import { ... } from '@jucodev/my-utils/math'`) lo tengáis mejor organizado, hay que añadir la propiedad [`exports` con los diferentes subpaths](https://nodejs.org/api/packages.html#subpath-exports) que os gustaría.
 
@@ -56,7 +55,6 @@ Vamos a iniciar el proyecto con el comando `npm init -y`, el cual nos creará el
   "private": false,
   "main": "src/index.js",
   "type": "module",
-  "types": "src/index.d.ts",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
   },
@@ -66,11 +64,7 @@ Vamos a iniciar el proyecto con el comando `npm init -y`, el cual nos creará el
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": ""
+  }
 }
 ```
 
@@ -94,15 +88,7 @@ export function sum(a, b) {
 }
 
 export function subtract(a, b) {
-  return a + b;
-}
-
-export function multiply(a, b) {
-  return a * b;
-}
-
-export function divide(a, b) {
-  return a / b;
+  return a - b;
 }
 ```
 
@@ -190,12 +176,11 @@ Lo siguiente será añadir la configuración de `@semantic-release` en nuestro *
 
 ```json
 {
-  ...,
-    "release": {
+  "release": {
     "branches": [
       "main"
     ],
-    "repositoryUrl": "https://github.com/crazy-grey/react-ui-kit.git",
+    "repositoryUrl": "https://github.com/jucodev/my-utils.git",
     "plugins": [
       "@semantic-release/commit-analyzer",
       "@semantic-release/release-notes-generator",
@@ -263,6 +248,8 @@ on:
     types: [published]
 # ...
 ```
+
+Si habéis publicado un paquete con la anterior Github Action, deberéis de **incrementar la versión del `package.json`** manualmente la primera vez, ya que como detecta que todavía no existen releases, creará una con la versión actual que tiene.
 
 **Nota**: si queremos sacar un versión `major` deberemos de escribir un commit que contenga un `BREAKING CHANGE`, os dejo aquí un ejemplo:
 

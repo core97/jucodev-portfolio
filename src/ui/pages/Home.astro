@@ -10,7 +10,6 @@ import { PAGES } from "@/constants/pages";
 import { useUrl } from "@/ui/hooks/useUrl";
 import { useTranslation } from "@/ui/hooks/useTranslation";
 
-
 const posts = await getCollection("posts");
 
 const sortedPosts = posts.sort(
@@ -19,26 +18,26 @@ const sortedPosts = posts.sort(
 
 const latestPost = sortedPosts.slice(0, 5);
 
-const {  getLangFromUrl } = useUrl();
+const { getLangFromUrl } = useUrl();
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslation(lang);
 
 /**
  * TODO:
- * - Añadir los meta tags en el <head>
+ * - Crear los artículos en ingles
  * - Añadir las paginas de works como vacío
  * - Añadir el sitemap
  * - Añadir en la parte de projects este blog creado
  */
 ---
 
-<Layout title="Welcome to Astro." description="Lorem ipsum">
+<Layout title={t('metatag.home.title')} description={t('metatag.home.description')}>
   <Container>
     <main>
       <h4
         class="animate-blur-fade font-semibold text-xl text-black dark:text-white flex items-center"
       >
-        {t('home.header')}<span class="mx-2 text-xl">👋</span>
+        {t("home.header")}<span class="mx-2 text-xl">👋</span>
       </h4>
       <Social className="my-4 animate-blur-fade" />
       <div class="flex flex-col gap-16">

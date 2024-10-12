@@ -10,7 +10,7 @@ import { useTranslation } from "@/ui/hooks/useTranslation";
 
 const posts = await getCollection("posts");
 
-const {  getLangFromUrl } = useUrl();
+const { getLangFromUrl } = useUrl();
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslation(lang);
 
@@ -29,7 +29,10 @@ const groupedByYear = posts.reduce(
 const tags = [...new Set(posts.flatMap((el) => el.data.tags))].sort();
 ---
 
-<Layout title="Blog" description="Lorem ipsum">
+<Layout
+  title={t("metatag.blog.title")}
+  description={t("metatag.blog.description")}
+>
   <Container>
     <main>
       <div>

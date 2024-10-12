@@ -6,6 +6,8 @@ import Container from "@/ui/components/Container.astro";
 import ArrowCard from "@/ui/components/Cards/ArrowCard.astro";
 import { PAGES } from "@/constants/pages";
 import { useUrl } from "@/ui/hooks/useUrl";
+import { useTranslation } from "@/ui/hooks/useTranslation";
+import { snakeToTitleCase } from "@/utils/text";
 
 interface Props {
   posts: Array<
@@ -22,13 +24,21 @@ interface Props {
   tag: string;
 }
 
-const {  getLangFromUrl } = useUrl();
+const { getLangFromUrl } = useUrl();
 const lang = getLangFromUrl(Astro.url);
+const t = useTranslation(lang);
 
 const { posts, tag } = Astro.props;
+const tagParsed = snakeToTitleCase(tag);
 ---
 
-<Layout title="Blog" description="Lorem ipsum">
+<Layout
+  title={t("metatag.blog_by_tag.title").replace("{{tag}}", tagParsed)}
+  description={t("metatag.blog_by_tag.description").replaceAll(
+    "{{tag}}",
+    tagParsed
+  )}
+>
   <Container>
     <div class="mb-6">
       <h3

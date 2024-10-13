@@ -7,7 +7,6 @@ import Modal from "@/ui/components/Modal.astro";
 import { PAGES } from "@/constants/pages";
 import { useUrl } from "@/ui/hooks/useUrl";
 import { useTranslation } from "@/ui/hooks/useTranslation";
-import { LANGUAGES } from "@/i18n/config";
 
 const { getLangFromUrl } = useUrl();
 const lang = getLangFromUrl(Astro.url);

@@ -2,13 +2,12 @@
 import Icon from "@/ui/components/Icon/Icon.astro";
 
 interface Props {
-  className?: string;
   id?: string;
   size?: "sm" | "md" | "lg" | "xl" | "2xl";
   title?: string;
 }
 
-const { className, id, size = "md", title } = Astro.props;
+const { id, size = "md", title } = Astro.props;
 ---
 
 <dialog
@@ -33,7 +32,7 @@ const { className, id, size = "md", title } = Astro.props;
   <slot />
 </dialog>
 
-<script define:vars={{ id }}>
+<script define:vars={{ id }} is:inline>
   const modal = document.querySelector(`#${id}`);
 
   const closeModalButton = document.querySelector(`#close_button_${id}`);

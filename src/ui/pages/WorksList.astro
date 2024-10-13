@@ -5,6 +5,8 @@ import Icon from "@/ui/components/Icon/Icon.astro";
 import { useUrl } from "@/ui/hooks/useUrl";
 import { useTranslation } from "@/ui/hooks/useTranslation";
 
+// @see https://www.youtube.com/watch?v=HEMvsJTBweY
+
 const { getLangFromUrl } = useUrl();
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslation(lang);

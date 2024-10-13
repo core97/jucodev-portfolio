@@ -1,4 +1,4 @@
-import { LANGUAGES, LOCALES, DEFAULT_LANG } from "@/i18n/config";
+import { LANGUAGES, DEFAULT_LANG } from "@/i18n/config";
 
 function getLangFromUrl(url: URL): LANGUAGES {
   const [, lang] = url.pathname.split("/");

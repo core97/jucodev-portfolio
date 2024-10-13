@@ -5,6 +5,8 @@ import Icon from "@/ui/components/Icon/Icon.astro";
 import { useUrl } from "@/ui/hooks/useUrl";
 import { useTranslation } from "@/ui/hooks/useTranslation";
 
+// @see https://astro-nano-demo.vercel.app/projects/project-2
+
 const { getLangFromUrl } = useUrl();
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslation(lang);

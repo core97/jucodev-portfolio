@@ -1,3 +1,4 @@
+import BuildingIcon from "./assets/BuildingIcon.astro";
 import CheckedIcon from "./assets/CheckedIcon.astro";
 import CloseIcon from "./assets/CloseIcon.astro";
 import EmptyIcon from "./assets/EmptyIcon.astro";
@@ -9,6 +10,7 @@ import MoonIcon from "./assets/MoonIcon.astro";
 import SunIcon from "./assets/SunIcon.astro";
 
 export const ICON_BY_NAME = {
+  building: BuildingIcon,
   checked: CheckedIcon,
   close: CloseIcon,
   empty: EmptyIcon,

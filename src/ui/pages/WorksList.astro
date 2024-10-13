@@ -1,0 +1,31 @@
+---
+import Layout from "@/ui/layouts/Layout.astro";
+import Container from "@/ui/components/Container.astro";
+import Icon from "@/ui/components/Icon/Icon.astro";
+import { useUrl } from "@/ui/hooks/useUrl";
+import { useTranslation } from "@/ui/hooks/useTranslation";
+
+const { getLangFromUrl } = useUrl();
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslation(lang);
+---
+
+<Layout
+  title={t("metatag.works.title")}
+  description={t("metatag.works.description")}
+>
+  <Container>
+    <main>
+      <div>
+        <h4 class="font-bold text-xl">{t("works.header")}</h4>
+      </div>
+      <div class="mt-20 flex flex-col items-center">
+        <Icon name="building" size={150} />
+        <span
+          class="mt-4 font-bold text-xl underline underline-offset-4 decoration-wavy"
+          >WIP</span
+        >
+      </div>
+    </main>
+  </Container>
+</Layout>

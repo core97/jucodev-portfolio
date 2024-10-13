@@ -2,6 +2,9 @@
   "about_me.first_paragraph": "Hi! I’m Juan, a web developer specializing in JavaScript and its related technologies. Throughout my career, I’ve worked on all kinds of projects, from complex web applications to efficient backend solutions, always with a focus on performance and code quality.",
   "about_me.second_paragraph": "When I’m not writing code, you’ll probably find me walking my dog, or working up a sweat practicing some sport.",
   "about_me.third_paragraph": "This blog is my space to share what I’ve been learning, from web development tips to personal ideas and reflections. If you’re passionate about code or just looking for something interesting to read, welcome! I hope you feel at home here.",
+  "blog.latest_post": "Latest posts",
+  "blog.see_all_post": "See all posts",
+  "blog.tags": "Tags",
   "home.header": "Welcome!",
   "language.en_label": "English",
   "language.es_label": "Spanish",
@@ -12,8 +15,14 @@
   "metatag.blog.title": "Blog | Web Development Tips",
   "metatag.home.description": "Explore web development tips, programming, and personal reflections on this blog. Learn about coding and discover interesting topics while enjoying diverse and enriching content. Welcome!",
   "metatag.home.title": "Web Development Blog | Programming Tips and Advice",
+  "metatag.projects.description": "Browse through a list of web development projects I have worked on. Discover examples of websites, applications, and solutions I’ve built using various technologies.",
+  "metatag.projects.title": "Web Development Projects | My Work and Completed Projects",
+  "metatag.works.description": "Learn about my work experience in web development and programming. Discover the roles and projects I’ve worked on, my technical skills, and professional achievements throughout my career.",
+  "metatag.works.title": "My Work Experience | Professional Background in Web Development",
   "nav.blog": "blog",
   "nav.work": "work",
   "nav.projects": "projects",
-  "reading_time.label": "{{time}} minutes of reading"
+  "projects.header": "Projects",
+  "reading_time.label": "{{time}} minutes of reading",
+  "works.header": "Work experience"
 }

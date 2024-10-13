@@ -2,6 +2,9 @@
   "about_me.first_paragraph": "¡Hola! Soy Juan, un desarrollador web especializado en JavaScript y sus tecnologías asociadas. A lo largo de mi carrera, he trabajado en todo tipo de proyectos, desde aplicaciones web complejas hasta soluciones eficientes en el backend, siempre con un enfoque en rendimiento y calidad de código.",
   "about_me.second_paragraph": "Cuando no estoy escribiendo código, probablemente esté paseando a mi perra, o sudando la camiseta practicando algún deporte.",
   "about_me.third_paragraph": "Este blog es mi espacio para compartir lo que voy aprendiendo, desde tips sobre desarrollo web hasta ideas y reflexiones personales. Si te interesa el mundo del código o simplemente buscas algo interesante que leer, ¡bienvenid@! Espero que te sientas a gusto aquí.",
+  "blog.latest_post": "Últimos posts",
+  "blog.see_all_post": "Ver todos los posts",
+  "blog.tags": "Etiquetas",
   "home.header": "¡Bienvenid@!",
   "language.en_label": "Inglés",
   "language.es_label": "Español",
@@ -12,8 +15,14 @@
   "metatag.blog.title": "Blog | Consejos de Desarrollo Web",
   "metatag.home.description": "Descubre tips de desarrollo web, programación y reflexiones personales en este blog. Aprende sobre código y temas interesantes mientras disfrutas de contenido variado y enriquecedor. ¡Bienvenid@!",
   "metatag.home.title": "Blog de Desarrollo Web | Tips y Consejos de Programación",
+  "metatag.projects.description": "Explora una lista de proyectos de desarrollo web que he realizado. Descubre ejemplos de sitios web, aplicaciones y soluciones que he creado con diferentes tecnologías.",
+  "metatag.projects.title": "Proyectos de Desarrollo Web | Mis Proyectos y Trabajos Realizados",
+  "metatag.works.description": "Conoce mi experiencia laboral en el desarrollo web y programación. Descubre los roles y proyectos en los que he trabajado, mis habilidades técnicas y logros profesionales a lo largo de mi carrera.",
+  "metatag.works.title": "Mi Experiencia Laboral | Trayectoria Profesional en Desarrollo Web",
   "nav.blog": "blog",
   "nav.work": "trabajo",
   "nav.projects": "proyectos",
-  "reading_time.label": "{{time}} minutos de lectura"
+  "projects.header": "Proyectos",
+  "reading_time.label": "{{time}} minutos de lectura",
+  "works.header": "Experiencia laboral"
 }

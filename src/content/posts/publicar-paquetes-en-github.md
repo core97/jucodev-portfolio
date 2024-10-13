@@ -46,7 +46,7 @@ Vamos a iniciar el proyecto con el comando `npm init -y`, el cual nos creará el
 - Añadir la información del repositorio con `repository.type` y `repository.url`.
 - Añadir la url del _registry_ de Github Packages con `publishConfig.registry`.
 - En caso de tener **Typescript**, le pondremos como `main` la ruta correspondiente del archivo de entrada de lo compilado y añadiremos la propiedad `types` con el archivo de declaraciones que nos genera.
-- Si queréis añadir **subpaths** para que luego al importar el paquete desde otro proyecto (por ejemplo, `import { ... } from '@jucodev/my-utils/math'`) lo tengáis mejor organizado, hay que añadir la propiedad [`exports` con los diferentes subpaths](https://nodejs.org/api/packages.html#subpath-exports) que os gustaría.
+- Si queréis añadir **subpaths exports** para que luego al importar el paquete desde otro proyecto (por ejemplo, `import { ... } from '@jucodev/my-utils/math'`) lo tengáis mejor organizado, hay que añadir la propiedad [`exports` con los diferentes subpaths](https://nodejs.org/api/packages.html#subpath-exports) que os gustaría.
 
 ```json
 {

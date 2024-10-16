@@ -16,7 +16,9 @@ const t = useTranslation(lang);
 <header>
   <Container>
     <div class="flex flex-wrap gap-y-2 justify-between">
-      <Link href={getRelativeLocaleUrl(lang, PAGES[lang].HOME)}>
+      <Link href={getRelativeLocaleUrl(lang, PAGES[lang].HOME)} className="flex items-center gap-1">
+        <Icon name="logo" size={36} />
+
         <div class="font-semibold">JUCODEV</div>
       </Link>
       <nav class="flex items-center gap-1">

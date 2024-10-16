@@ -2,11 +2,12 @@
 interface Props {
   ariaLabel?: string;
   href: string;
+  className?: string;
   isExternal?: boolean;
   isUnderline?: boolean;
 }
 
-const { href, ariaLabel, isExternal, isUnderline } = Astro.props;
+const { href, ariaLabel, className, isExternal, isUnderline } = Astro.props;
 ---
 
 <a
@@ -16,6 +17,7 @@ const { href, ariaLabel, isExternal, isUnderline } = Astro.props;
   class:list={[
     "inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out",
     { "underline underline-offset-2": isUnderline },
+    { [`${className}`]: className },
   ]}
 >
   <slot />
